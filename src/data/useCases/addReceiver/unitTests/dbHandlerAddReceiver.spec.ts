@@ -63,4 +63,16 @@ describe("dbHandlerAddReceiver use case", () => {
 
     await expect(promise).rejects.toThrow();
   });
+
+  it("should return a receiver on success", async () => {
+    const { sut } = makeSut();
+
+    const receiver = await sut.add(receiverData);
+
+    expect(receiver).toEqual({
+      ...receiverDataEncrypted,
+      status: "RASCUNHO",
+      id: "valid_id",
+    });
+  });
 });
