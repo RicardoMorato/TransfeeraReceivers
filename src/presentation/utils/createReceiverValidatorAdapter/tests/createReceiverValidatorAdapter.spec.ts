@@ -5,6 +5,16 @@ const makeSut = (): CreateReceiverValidatorAdapter => {
   return new CreateReceiverValidatorAdapter();
 };
 
+const createLargeEmail = (): string => {
+  let email = "";
+
+  for (let i = 0; i < 300; i++) email += "A";
+
+  email += "@A.com";
+
+  return email;
+};
+
 describe("createReceiverValidatorAdapter", () => {
   const receiverData = {
     name: "valid_name",
@@ -42,6 +52,21 @@ describe("createReceiverValidatorAdapter", () => {
 
     const requestWithInvalidEmail = {
       body: { ...request.body, email: "a.com" },
+    };
+
+    const validationResult = sut.validate(requestWithInvalidEmail);
+
+    expect(validationResult).toEqual({
+      error: new InvalidParamError("email"),
+      isValid: false,
+    });
+  });
+
+  it("should return an error if email is larger than 250 characters", () => {
+    const sut = makeSut();
+
+    const requestWithInvalidEmail = {
+      body: { ...request.body, email: createLargeEmail() },
     };
 
     const validationResult = sut.validate(requestWithInvalidEmail);
