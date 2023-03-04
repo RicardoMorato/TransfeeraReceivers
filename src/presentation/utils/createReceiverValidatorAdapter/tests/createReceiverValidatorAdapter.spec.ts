@@ -1,4 +1,4 @@
-import { MissingParamError } from "@/presentation/errors";
+import { InvalidParamError, MissingParamError } from "@/presentation/errors";
 import { CreateReceiverValidatorAdapter } from "../createReceiverValidatorAdapter";
 
 const makeSut = (): CreateReceiverValidatorAdapter => {
@@ -18,16 +18,10 @@ describe("createReceiverValidatorAdapter", () => {
     body: receiverData,
   };
 
-  it("should return an error if all required fields are not passed", () => {
+  it("should return an error if required fields are not passed", () => {
     const sut = makeSut();
 
-    const requiredFields = [
-      "name",
-      "document",
-      "email",
-      "pixKeyType",
-      "pixKey",
-    ];
+    const requiredFields = ["pixKeyType", "pixKey"];
 
     const requestWithoutField = (field: string) => {
       return { body: { ...request.body, [field]: "" } };
@@ -43,5 +37,24 @@ describe("createReceiverValidatorAdapter", () => {
         statusCode: 400,
       });
     }
+  });
+
+  it("should return an error if email is not valid", () => {
+    const sut = makeSut();
+
+    const requestWithInvalidEmail = {
+      body: { ...request.body, email: "a.com" },
+    };
+
+    const validationResult = sut.validate(requestWithInvalidEmail);
+    const emailValidationResult = sut.isEmailValid(request.body.email);
+
+    expect(validationResult).toEqual({
+      error: new InvalidParamError("email"),
+      isValid: false,
+      errorType: "INVALID_PARAM",
+      statusCode: 400,
+    });
+    expect(emailValidationResult).toEqual(false);
   });
 });
