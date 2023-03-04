@@ -102,9 +102,9 @@
   },
   "include": [
     "src/main/*.ts",
-    "src/**/*.ts",
-    "src/**/**/*.ts",
-    "src/**/**/**/*.ts"
+    "src/data/**/*.ts",
+    "src/domain/**/*.ts",
+    "src/presentation/**/*.ts"
   ],
   "exclude": ["node_modues"]
 }
