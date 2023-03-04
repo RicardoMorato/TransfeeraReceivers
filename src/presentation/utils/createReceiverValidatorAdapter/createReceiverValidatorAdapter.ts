@@ -95,5 +95,40 @@ export class CreateReceiverValidatorAdapter
     return false;
   }
 
-  isPixKeyValid: (pixKey: string, pixKeyType: PixKeyType) => boolean;
+  isPixKeyValid(pixKey: string, pixKeyType: PixKeyType): boolean {
+    switch (pixKeyType) {
+      case "CHAVE_ALEATORIA":
+        if (pixKey.match(validationPatterns.randomKey)) return true;
+
+        return false;
+        break;
+
+      case "CPF":
+        if (pixKey.match(validationPatterns.cpf)) return true;
+
+        return false;
+        break;
+
+      case "CNPJ":
+        if (pixKey.match(validationPatterns.cnpj)) return true;
+
+        return false;
+        break;
+
+      case "EMAIL":
+        if (pixKey.match(validationPatterns.email)) return true;
+
+        return false;
+        break;
+
+      case "TELEFONE":
+        if (pixKey.match(validationPatterns.phone)) return true;
+
+        return false;
+        break;
+      default:
+        return false;
+        break;
+    }
+  }
 }

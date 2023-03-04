@@ -7,5 +7,5 @@ export interface CreateReceiverValidation {
   isEmailValid: (email: string) => boolean;
   isDocumentValid: (document: string) => boolean;
   isPixKeyTypeValid: (pixKeyType: PixKeyType | string) => boolean;
-  isPixKeyValid: (pixKey: string, pixKeyType: string) => boolean;
+  isPixKeyValid: (pixKey: string, pixKeyType: PixKeyType) => boolean;
 }
