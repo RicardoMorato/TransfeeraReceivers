@@ -8,7 +8,7 @@ const makeSut = (): CreateReceiverValidatorAdapter => {
 describe("createReceiverValidatorAdapter", () => {
   const receiverData = {
     name: "valid_name",
-    email: "valid_email",
+    email: "valid_email@mail.com",
     document: "11111111111",
     pixKeyType: "EMAIL",
     pixKey: "valid_email",
@@ -47,7 +47,6 @@ describe("createReceiverValidatorAdapter", () => {
     };
 
     const validationResult = sut.validate(requestWithInvalidEmail);
-    const emailValidationResult = sut.isEmailValid(request.body.email);
 
     expect(validationResult).toEqual({
       error: new InvalidParamError("email"),
@@ -55,6 +54,22 @@ describe("createReceiverValidatorAdapter", () => {
       errorType: "INVALID_PARAM",
       statusCode: 400,
     });
-    expect(emailValidationResult).toEqual(false);
+  });
+
+  it("should return an error if document is not valid", () => {
+    const sut = makeSut();
+
+    const requestWithInvalidDocument = {
+      body: { ...request.body, document: "a" },
+    };
+
+    const validationResult = sut.validate(requestWithInvalidDocument);
+
+    expect(validationResult).toEqual({
+      error: new InvalidParamError("document"),
+      isValid: false,
+      errorType: "INVALID_PARAM",
+      statusCode: 400,
+    });
   });
 });
