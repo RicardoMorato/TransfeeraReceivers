@@ -8,7 +8,7 @@ const makeSut = (): CreateReceiverValidatorAdapter => {
 describe("createReceiverValidatorAdapter", () => {
   const receiverData = {
     name: "valid_name",
-    email: "valid_email@mail.com",
+    email: "VALID-EMAIL@MAIL.COM",
     document: "11111111111",
     pixKeyType: "EMAIL",
     pixKey: "valid_email",
@@ -78,6 +78,23 @@ describe("createReceiverValidatorAdapter", () => {
 
     const requestWithInvalidPixKeyType = {
       body: { ...request.body, pixKeyType: "a" },
+    };
+
+    const validationResult = sut.validate(requestWithInvalidPixKeyType);
+
+    expect(validationResult).toEqual({
+      error: new InvalidParamError("pixKeyType"),
+      isValid: false,
+      errorType: "INVALID_PARAM",
+      statusCode: 400,
+    });
+  });
+
+  it("should return an error if pix key is not valid", () => {
+    const sut = makeSut();
+
+    const requestWithInvalidPixKeyType = {
+      body: { ...request.body, pixKey: "a" },
     };
 
     const validationResult = sut.validate(requestWithInvalidPixKeyType);
