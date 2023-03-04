@@ -72,7 +72,17 @@ export class CreateReceiverValidatorAdapter
 
     return isValid;
   }
-  isDocumentValid: (document: string) => boolean;
+  isDocumentValid(document: string): boolean {
+    const documentMatchesPattern =
+      document.match(/^[0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2}$/) || // CPF pattern
+      document.match(
+        /^[0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2}$/
+      ); // CNPJ pattern
+
+    if (documentMatchesPattern) return true;
+
+    return false;
+  }
   isPixKeyTypeValid: (pixKeyType: string) => boolean;
   isPixKeyValid: (pixKey: string, pixKeyType: string) => boolean;
 }
