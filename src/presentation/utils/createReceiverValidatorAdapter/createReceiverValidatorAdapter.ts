@@ -1,10 +1,12 @@
 import validator from "validator";
+import { PixKeyType } from "@/domain/models/Receiver";
 import { InvalidParamError, MissingParamError } from "@/presentation/errors";
 import {
   HttpRequest,
   CreateReceiverValidation,
 } from "@/presentation/protocols";
 import { ValidationResult } from "./createReceiverValidatorAdapterProtocol";
+import { isStringValidPixKeyType } from "../isStringValidPixKeyType";
 
 export class CreateReceiverValidatorAdapter
   implements CreateReceiverValidation
@@ -67,22 +69,30 @@ export class CreateReceiverValidatorAdapter
       statusCode: 200,
     };
   }
+
   isEmailValid(email: string): boolean {
     const isValid = validator.isEmail(email) && email.length <= 250;
 
     return isValid;
   }
+
   isDocumentValid(document: string): boolean {
     const documentMatchesPattern =
       document.match(/^[0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2}$/) || // CPF pattern
       document.match(
-        /^[0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2}$/
-      ); // CNPJ pattern
+        /^[0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2}$/ // CNPJ pattern
+      );
 
     if (documentMatchesPattern) return true;
 
     return false;
   }
-  isPixKeyTypeValid: (pixKeyType: string) => boolean;
-  isPixKeyValid: (pixKey: string, pixKeyType: string) => boolean;
+
+  isPixKeyTypeValid(pixKeyType: string): boolean {
+    if (isStringValidPixKeyType(pixKeyType as PixKeyType)) return true;
+
+    return false;
+  }
+
+  isPixKeyValid: (pixKey: string, pixKeyType: PixKeyType) => boolean;
 }
