@@ -11,7 +11,7 @@ describe("createReceiverValidatorAdapter", () => {
     email: "VALID-EMAIL@MAIL.COM",
     document: "11111111111",
     pixKeyType: "EMAIL",
-    pixKey: "valid_email",
+    pixKey: "VALID-EMAIL@MAIL.COM",
   };
 
   const request = {
@@ -104,6 +104,19 @@ describe("createReceiverValidatorAdapter", () => {
       isValid: false,
       errorType: "INVALID_PARAM",
       statusCode: 400,
+    });
+  });
+
+  it("should return a validated response if all fields are valid", () => {
+    const sut = makeSut();
+
+    const validationResult = sut.validate(request);
+
+    expect(validationResult).toEqual({
+      error: null,
+      isValid: true,
+      errorType: null,
+      statusCode: 200,
     });
   });
 });
