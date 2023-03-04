@@ -1,4 +1,3 @@
-import validator from "validator";
 import { PixKeyType } from "@/domain/models/Receiver";
 import { InvalidParamError, MissingParamError } from "@/presentation/errors";
 import {
@@ -7,6 +6,7 @@ import {
 } from "@/presentation/protocols";
 import { ValidationResult } from "./createReceiverValidatorAdapterProtocol";
 import { isStringValidPixKeyType } from "../isStringValidPixKeyType";
+import { validationPatterns } from "../validationPatterns";
 
 export class CreateReceiverValidatorAdapter
   implements CreateReceiverValidation
@@ -71,17 +71,18 @@ export class CreateReceiverValidatorAdapter
   }
 
   isEmailValid(email: string): boolean {
-    const isValid = validator.isEmail(email) && email.length <= 250;
+    const isValid =
+      email.match(validationPatterns.email) &&
+      email.length <= 250 &&
+      email.length > 0;
 
     return isValid;
   }
 
   isDocumentValid(document: string): boolean {
     const documentMatchesPattern =
-      document.match(/^[0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2}$/) || // CPF pattern
-      document.match(
-        /^[0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2}$/ // CNPJ pattern
-      );
+      document.match(validationPatterns.cpf) ||
+      document.match(validationPatterns.cnpj);
 
     if (documentMatchesPattern) return true;
 
