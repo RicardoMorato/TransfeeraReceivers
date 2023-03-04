@@ -72,4 +72,21 @@ describe("createReceiverValidatorAdapter", () => {
       statusCode: 400,
     });
   });
+
+  it("should return an error if pix key type is not valid", () => {
+    const sut = makeSut();
+
+    const requestWithInvalidPixKeyType = {
+      body: { ...request.body, pixKeyType: "a" },
+    };
+
+    const validationResult = sut.validate(requestWithInvalidPixKeyType);
+
+    expect(validationResult).toEqual({
+      error: new InvalidParamError("pixKeyType"),
+      isValid: false,
+      errorType: "INVALID_PARAM",
+      statusCode: 400,
+    });
+  });
 });
