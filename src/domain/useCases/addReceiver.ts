@@ -1,9 +1,9 @@
 import { ReceiverModel } from "../models/Receiver";
 
 export interface AddReceiverModel {
-  name: string;
-  document: string;
-  email: string;
+  name?: string;
+  document?: string;
+  email?: string;
   pixKeyType: string;
   pixKey: string;
 }

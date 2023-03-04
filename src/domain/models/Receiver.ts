@@ -1,8 +1,8 @@
 export interface ReceiverModel {
   id: string;
-  name: string;
-  document: string;
-  email: string;
+  name?: string;
+  document?: string;
+  email?: string;
   pixKeyType: string;
   pixKey: string;
   status: Status;
