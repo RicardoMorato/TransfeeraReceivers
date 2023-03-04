@@ -3,7 +3,7 @@ export interface ReceiverModel {
   name: string;
   document: string;
   email: string;
-  pixKeyType: PixKeyType;
+  pixKeyType: string;
   pixKey: string;
   status: Status;
   bank?: string;
@@ -12,15 +12,11 @@ export interface ReceiverModel {
   accountNumber?: string;
 }
 
-export enum PixKeyType {
-  email = "EMAIL",
-  cpf = "CPF",
-  cnpj = "CNPJ",
-  phone = "TELEFONE",
-  randomKey = "CHAVE_ALEATORIA",
-}
+export type PixKeyType =
+  | "EMAIL"
+  | "CPF"
+  | "CNPJ"
+  | "TELEFONE"
+  | "CHAVE_ALEATORIA";
 
-enum Status {
-  draft = "RASCUNHO",
-  validated = "VALIDADO",
-}
+type Status = "RASCUNHO" | "VALIDADO";

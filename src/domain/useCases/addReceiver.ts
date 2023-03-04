@@ -1,10 +1,10 @@
-import { ReceiverModel, PixKeyType } from "../models/Receiver";
+import { ReceiverModel } from "../models/Receiver";
 
 export interface AddReceiverModel {
   name: string;
   document: string;
   email: string;
-  pixKeyType: PixKeyType;
+  pixKeyType: string;
   pixKey: string;
 }
 
