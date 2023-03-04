@@ -4,7 +4,7 @@
   "description": "An API capable of creating, reading, updating and deleting Transfeera's receivers",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/app.ts",
+    "dev": "nodemon src/main/app.ts",
     "test": "test",
     "prepare": "husky install"
   },
