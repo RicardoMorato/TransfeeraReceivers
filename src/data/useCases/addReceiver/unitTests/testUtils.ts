@@ -2,28 +2,25 @@ import {
   Encrypter,
   AddReceiverModel,
   ReceiverModel,
-  AddReceiverRepository,
+  ReceiverRepository,
 } from "../dbHandlerAddReceiverProtocols";
 import { DbHandlerAddReceiver } from "../dbHandlerAddReceiver";
 
 interface SutTypes {
   sut: DbHandlerAddReceiver;
   encrypterStub: Encrypter;
-  addReceiverRepositoryStub: AddReceiverRepository;
+  ReceiverRepositoryStub: ReceiverRepository;
 }
 
 export const makeSut = (): SutTypes => {
   const encrypterStub = makeEncrypter();
-  const addReceiverRepositoryStub = makeAddReceiverRepository();
-  const sut = new DbHandlerAddReceiver(
-    encrypterStub,
-    addReceiverRepositoryStub
-  );
+  const ReceiverRepositoryStub = makeReceiverRepository();
+  const sut = new DbHandlerAddReceiver(encrypterStub, ReceiverRepositoryStub);
 
   return {
     sut,
     encrypterStub,
-    addReceiverRepositoryStub,
+    ReceiverRepositoryStub,
   };
 };
 
@@ -37,8 +34,8 @@ const makeEncrypter = (): Encrypter => {
   return new EncrypterStub();
 };
 
-const makeAddReceiverRepository = (): AddReceiverRepository => {
-  class AddReceiverRepositoryStub implements AddReceiverRepository {
+const makeReceiverRepository = (): ReceiverRepository => {
+  class ReceiverRepositoryStub implements ReceiverRepository {
     add(receiver: AddReceiverModel): Promise<ReceiverModel> {
       const fakeReceiver: ReceiverModel = {
         ...receiver,
@@ -50,5 +47,5 @@ const makeAddReceiverRepository = (): AddReceiverRepository => {
     }
   }
 
-  return new AddReceiverRepositoryStub();
+  return new ReceiverRepositoryStub();
 };

@@ -2,20 +2,17 @@ import {
   AddReceiver,
   AddReceiverModel,
   ReceiverModel,
-  AddReceiverRepository,
+  ReceiverRepository,
   Encrypter,
 } from "./dbHandlerAddReceiverProtocols";
 
 export class DbHandlerAddReceiver implements AddReceiver {
   private readonly encrypter: Encrypter;
-  private readonly addReceiverRepository: AddReceiverRepository;
+  private readonly ReceiverRepository: ReceiverRepository;
 
-  constructor(
-    encrypter: Encrypter,
-    addReceiverRepository: AddReceiverRepository
-  ) {
+  constructor(encrypter: Encrypter, ReceiverRepository: ReceiverRepository) {
     this.encrypter = encrypter;
-    this.addReceiverRepository = addReceiverRepository;
+    this.ReceiverRepository = ReceiverRepository;
   }
 
   async add(receiverData: AddReceiverModel): Promise<ReceiverModel> {
@@ -28,7 +25,7 @@ export class DbHandlerAddReceiver implements AddReceiver {
       pixKey: await this.encrypter.encrypt(receiverData.pixKey),
     };
 
-    const receiver = await this.addReceiverRepository.add({
+    const receiver = await this.ReceiverRepository.add({
       ...encryptedValues,
       name: receiverData.name,
     });

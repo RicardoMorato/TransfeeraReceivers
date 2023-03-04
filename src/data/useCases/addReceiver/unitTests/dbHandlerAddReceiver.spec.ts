@@ -30,8 +30,8 @@ describe("dbHandlerAddReceiver use case", () => {
   });
 
   it("should call AddReceiverRepository with correct values", async () => {
-    const { sut, addReceiverRepositoryStub } = makeSut();
-    const repositorySpy = jest.spyOn(addReceiverRepositoryStub, "add");
+    const { sut, ReceiverRepositoryStub } = makeSut();
+    const repositorySpy = jest.spyOn(ReceiverRepositoryStub, "add");
 
     await sut.add(receiverData);
 
@@ -52,9 +52,9 @@ describe("dbHandlerAddReceiver use case", () => {
   });
 
   it("should throw if AddReceiverRepository throws", async () => {
-    const { sut, addReceiverRepositoryStub } = makeSut();
+    const { sut, ReceiverRepositoryStub } = makeSut();
     jest
-      .spyOn(addReceiverRepositoryStub, "add")
+      .spyOn(ReceiverRepositoryStub, "add")
       .mockReturnValueOnce(
         new Promise((resolve, reject) => reject(new Error()))
       );
