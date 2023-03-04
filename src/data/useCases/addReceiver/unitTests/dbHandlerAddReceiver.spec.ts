@@ -50,4 +50,17 @@ describe("dbHandlerAddReceiver use case", () => {
 
     await expect(promise).rejects.toThrow();
   });
+
+  it("should throw if AddReceiverRepository throws", async () => {
+    const { sut, addReceiverRepositoryStub } = makeSut();
+    jest
+      .spyOn(addReceiverRepositoryStub, "add")
+      .mockReturnValueOnce(
+        new Promise((resolve, reject) => reject(new Error()))
+      );
+
+    const promise = sut.add(receiverData);
+
+    await expect(promise).rejects.toThrow();
+  });
 });
