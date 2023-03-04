@@ -19,8 +19,6 @@ export class CreateReceiverValidatorAdapter
         return {
           error: new MissingParamError(field),
           isValid: false,
-          errorType: "MISSING_PARAM",
-          statusCode: 400,
         };
     }
 
@@ -31,8 +29,6 @@ export class CreateReceiverValidatorAdapter
         return {
           error: new InvalidParamError("email"),
           isValid: false,
-          errorType: "INVALID_PARAM",
-          statusCode: 400,
         };
     }
 
@@ -41,8 +37,6 @@ export class CreateReceiverValidatorAdapter
         return {
           error: new InvalidParamError("document"),
           isValid: false,
-          errorType: "INVALID_PARAM",
-          statusCode: 400,
         };
     }
 
@@ -50,23 +44,17 @@ export class CreateReceiverValidatorAdapter
       return {
         error: new InvalidParamError("pixKeyType"),
         isValid: false,
-        errorType: "INVALID_PARAM",
-        statusCode: 400,
       };
 
     if (!this.isPixKeyValid(pixKey, pixKeyType))
       return {
         error: new InvalidParamError("pixKeyType"),
         isValid: false,
-        errorType: "INVALID_PARAM",
-        statusCode: 400,
       };
 
     return {
       error: null,
       isValid: true,
-      errorType: null,
-      statusCode: 200,
     };
   }
 

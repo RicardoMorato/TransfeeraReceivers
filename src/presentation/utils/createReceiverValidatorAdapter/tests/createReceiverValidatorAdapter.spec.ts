@@ -33,8 +33,6 @@ describe("createReceiverValidatorAdapter", () => {
       expect(result).toEqual({
         error: new MissingParamError(field),
         isValid: false,
-        errorType: "MISSING_PARAM",
-        statusCode: 400,
       });
     }
   });
@@ -51,8 +49,6 @@ describe("createReceiverValidatorAdapter", () => {
     expect(validationResult).toEqual({
       error: new InvalidParamError("email"),
       isValid: false,
-      errorType: "INVALID_PARAM",
-      statusCode: 400,
     });
   });
 
@@ -68,8 +64,6 @@ describe("createReceiverValidatorAdapter", () => {
     expect(validationResult).toEqual({
       error: new InvalidParamError("document"),
       isValid: false,
-      errorType: "INVALID_PARAM",
-      statusCode: 400,
     });
   });
 
@@ -85,8 +79,6 @@ describe("createReceiverValidatorAdapter", () => {
     expect(validationResult).toEqual({
       error: new InvalidParamError("pixKeyType"),
       isValid: false,
-      errorType: "INVALID_PARAM",
-      statusCode: 400,
     });
   });
 
@@ -102,8 +94,6 @@ describe("createReceiverValidatorAdapter", () => {
     expect(validationResult).toEqual({
       error: new InvalidParamError("pixKeyType"),
       isValid: false,
-      errorType: "INVALID_PARAM",
-      statusCode: 400,
     });
   });
 
@@ -115,8 +105,6 @@ describe("createReceiverValidatorAdapter", () => {
     expect(validationResult).toEqual({
       error: null,
       isValid: true,
-      errorType: null,
-      statusCode: 200,
     });
   });
 });
