@@ -60,9 +60,7 @@ export class CreateReceiverValidatorAdapter
 
   isEmailValid(email: string): boolean {
     const isValid =
-      email.match(validationPatterns.email) &&
-      email.length <= 250 &&
-      email.length > 0;
+      email.match(validationPatterns.email) && email.length <= 250;
 
     return isValid;
   }
