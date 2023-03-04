@@ -10,13 +10,7 @@ export class CreateReceiverValidatorAdapter
   implements CreateReceiverValidation
 {
   validate(request: HttpRequest): ValidationResult {
-    const requiredFields = [
-      "name",
-      "document",
-      "email",
-      "pixKeyType",
-      "pixKey",
-    ];
+    const requiredFields = ["pixKeyType", "pixKey"];
 
     for (const field of requiredFields) {
       if (!request.body[field])
@@ -28,31 +22,27 @@ export class CreateReceiverValidatorAdapter
         };
     }
 
-    const { name, document, email, pixKeyType, pixKey } = request.body;
+    const { document, email, pixKeyType, pixKey } = request.body;
 
-    if (!this.isNameValid(name))
-      return {
-        error: new InvalidParamError("name"),
-        isValid: false,
-        errorType: "INVALID_PARAM",
-        statusCode: 400,
-      };
+    if (email) {
+      if (!this.isEmailValid(email))
+        return {
+          error: new InvalidParamError("email"),
+          isValid: false,
+          errorType: "INVALID_PARAM",
+          statusCode: 400,
+        };
+    }
 
-    if (!this.isEmailValid(email))
-      return {
-        error: new InvalidParamError("email"),
-        isValid: false,
-        errorType: "INVALID_PARAM",
-        statusCode: 400,
-      };
-
-    if (!this.isDocumentValid(document))
-      return {
-        error: new InvalidParamError("document"),
-        isValid: false,
-        errorType: "INVALID_PARAM",
-        statusCode: 400,
-      };
+    if (document) {
+      if (!this.isDocumentValid(document))
+        return {
+          error: new InvalidParamError("document"),
+          isValid: false,
+          errorType: "INVALID_PARAM",
+          statusCode: 400,
+        };
+    }
 
     if (!this.isPixKeyTypeValid(pixKeyType))
       return {
@@ -77,8 +67,11 @@ export class CreateReceiverValidatorAdapter
       statusCode: 200,
     };
   }
-  isNameValid: (name: string) => boolean;
-  isEmailValid: (email: string) => boolean;
+  isEmailValid(email: string): boolean {
+    const isValid = validator.isEmail(email) && email.length <= 250;
+
+    return isValid;
+  }
   isDocumentValid: (document: string) => boolean;
   isPixKeyTypeValid: (pixKeyType: string) => boolean;
   isPixKeyValid: (pixKey: string, pixKeyType: string) => boolean;
