@@ -1,5 +1,6 @@
 import {
   Encrypter,
+  AddReceiverModel,
   ReceiverModel,
   AddReceiverRepository,
 } from "../dbHandlerAddReceiverProtocols";
@@ -38,14 +39,10 @@ const makeEncrypter = (): Encrypter => {
 
 const makeAddReceiverRepository = (): AddReceiverRepository => {
   class AddReceiverRepositoryStub implements AddReceiverRepository {
-    add(): Promise<ReceiverModel> {
+    add(receiver: AddReceiverModel): Promise<ReceiverModel> {
       const fakeReceiver: ReceiverModel = {
+        ...receiver,
         id: "valid_id",
-        name: "valid_name",
-        email: "valid_email",
-        document: "11111111111",
-        pixKeyType: "EMAIL",
-        pixKey: "valid_email",
         status: "RASCUNHO",
       };
 
