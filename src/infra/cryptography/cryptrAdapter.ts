@@ -8,7 +8,7 @@ export class CryptrAdapter implements Encrypter {
   private readonly cryptr: Cryptr;
   private readonly encryptionSecretKey: string | null;
 
-  constructor(encryptionSecretKey: string | null) {
+  constructor(encryptionSecretKey?: string | null) {
     this.encryptionSecretKey = encryptionSecretKey;
 
     this.cryptr = new Cryptr(
