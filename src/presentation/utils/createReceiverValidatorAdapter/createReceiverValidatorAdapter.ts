@@ -48,7 +48,7 @@ export class CreateReceiverValidatorAdapter
 
     if (!this.isPixKeyValid(pixKey, pixKeyType))
       return {
-        error: new InvalidParamError("pixKeyType"),
+        error: new InvalidParamError("pixKey"),
         isValid: false,
       };
 

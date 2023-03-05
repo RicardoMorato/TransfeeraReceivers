@@ -117,7 +117,7 @@ describe("createReceiverValidatorAdapter", () => {
     const validationResult = sut.validate(requestWithInvalidPixKeyType);
 
     expect(validationResult).toEqual({
-      error: new InvalidParamError("pixKeyType"),
+      error: new InvalidParamError("pixKey"),
       isValid: false,
     });
   });
