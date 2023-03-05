@@ -32,9 +32,9 @@ export class CreateReceiverController implements Controller {
       const { name, document, email, pixKeyType, pixKey } = request.body;
 
       const receiver = await this.addReceiver.add({
-        name,
-        document,
-        email,
+        name: name || "",
+        document: document || "",
+        email: email || "",
         pixKeyType,
         pixKey,
       });
