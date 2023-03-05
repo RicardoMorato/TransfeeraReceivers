@@ -2,4 +2,5 @@ import { PixKeyType } from "../useCases/addReceiver/dbHandlerAddReceiverProtocol
 
 export interface Encrypter {
   encrypt(value: string | PixKeyType): Promise<string | PixKeyType>;
+  decrypt(encryptedString: string): Promise<String>;
 }
