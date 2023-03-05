@@ -1,6 +1,8 @@
-import dotenv from "dotenv";
 import { DBHelper } from "./mongodb";
+import { getEnvVariables } from "@/main/config";
 
-dotenv.config();
+const {
+  DB: { CONNECTION_URL },
+} = getEnvVariables();
 
-export const database = new DBHelper(process.env.DB_CONNECTION_URL);
+export const database = new DBHelper(CONNECTION_URL);

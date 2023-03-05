@@ -1,8 +1,10 @@
 import Cryptr from "cryptr";
-import dotenv from "dotenv";
 import { Encrypter } from "@/data/protocols/encrypter";
+import { getEnvVariables } from "@/main/config";
 
-dotenv.config();
+const {
+  APP: { ENCRYPTION_SECRET_KEY },
+} = getEnvVariables();
 
 export class CryptrAdapter implements Encrypter {
   private readonly cryptr: Cryptr;
@@ -11,9 +13,7 @@ export class CryptrAdapter implements Encrypter {
   constructor(encryptionSecretKey?: string | null) {
     this.encryptionSecretKey = encryptionSecretKey;
 
-    this.cryptr = new Cryptr(
-      process.env.ENCRYPTION_SECRECT_KEY || this.encryptionSecretKey
-    );
+    this.cryptr = new Cryptr(this.encryptionSecretKey || ENCRYPTION_SECRET_KEY);
   }
 
   encrypt(value: string): Promise<string> {

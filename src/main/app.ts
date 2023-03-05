@@ -1,17 +1,18 @@
 import "module-alias/register";
 import express, { Application } from "express";
-import dotenv from "dotenv";
 import cors from "cors";
 
 import { database } from "@/infra/db";
 import { router } from "@/main/routes";
+import { getEnvVariables } from "@/main/config";
 
-dotenv.config();
+const {
+  APP: { PORT, NODE_ENV },
+} = getEnvVariables();
 
 const app: Application = express();
 
-const port: string | number = process.env.PORT || 8080;
-const environment: string = process.env.NODE_ENV || "development";
+const port: string | number = PORT;
 
 app.use(cors());
 app.use(express.json());
@@ -24,7 +25,7 @@ database
 
     app.listen(port, () => {
       console.log(
-        `====> App is running on port ${port} with ${environment} configs ✅`
+        `====> App is running on port ${port} with ${NODE_ENV} configs ✅`
       );
     });
   })

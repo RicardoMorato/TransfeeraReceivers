@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/main/app.ts",
-    "test": "export NODE_ENV=TEST && jest --passWithNoTests --silent --noStackTrace --runInBand",
+    "test": "export NODE_ENV=testing && jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "yarn test -- --watch -c jest-unit-config.js",
     "test:integration": "yarn test -- --watch -c jest-integration-config.js",
