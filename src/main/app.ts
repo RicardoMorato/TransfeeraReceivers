@@ -1,14 +1,20 @@
 import "module-alias/register";
 import express, { Application } from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 
 import { database } from "@/infra/db";
+import { router } from "@/main/routes";
 
 dotenv.config();
 
 const app: Application = express();
 
 const port: string | number = process.env.PORT || 8080;
+
+app.use(cors());
+app.use(express.json());
+app.use("/api", router);
 
 database
   .connect()
