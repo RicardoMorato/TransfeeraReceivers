@@ -1,4 +1,4 @@
-import { ReceiverModel } from "../models/Receiver";
+import { ReceiverModel } from "@/domain/models";
 
 export interface AddReceiverModel {
   name?: string;
