@@ -1,6 +1,6 @@
-import { ReceiverModel } from "@/domain/models/Receiver";
+import { Document, InsertOneResult } from "mongodb";
 import { AddReceiverModel } from "@/domain/useCases/addReceiver";
 
-export interface ReceiverRepository {
-  add(receiver: AddReceiverModel): Promise<ReceiverModel>;
+export interface AddReceiverRepository {
+  add(receiver: AddReceiverModel): Promise<InsertOneResult<Document>>;
 }

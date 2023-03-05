@@ -1,5 +1,7 @@
+import { ObjectId } from "mongodb";
+
 export interface ReceiverModel {
-  id: string;
+  id: string | ObjectId;
   name?: string;
   document?: string;
   email?: string;
@@ -19,4 +21,4 @@ export type PixKeyType =
   | "TELEFONE"
   | "CHAVE_ALEATORIA";
 
-type Status = "RASCUNHO" | "VALIDADO";
+export type Status = "RASCUNHO" | "VALIDADO";

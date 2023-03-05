@@ -15,6 +15,7 @@ describe("dbHandlerAddReceiver use case", () => {
     document: "encrypted_value",
     pixKeyType: "encrypted_value",
     pixKey: "encrypted_value",
+    status: "RASCUNHO",
   };
 
   it("should call Encrypter with correct fields", async () => {
@@ -30,8 +31,8 @@ describe("dbHandlerAddReceiver use case", () => {
   });
 
   it("should call AddReceiverRepository with correct values", async () => {
-    const { sut, ReceiverRepositoryStub } = makeSut();
-    const repositorySpy = jest.spyOn(ReceiverRepositoryStub, "add");
+    const { sut, addReceiverRepositoryStub } = makeSut();
+    const repositorySpy = jest.spyOn(addReceiverRepositoryStub, "add");
 
     await sut.add(receiverData);
 
@@ -52,9 +53,9 @@ describe("dbHandlerAddReceiver use case", () => {
   });
 
   it("should throw if AddReceiverRepository throws", async () => {
-    const { sut, ReceiverRepositoryStub } = makeSut();
+    const { sut, addReceiverRepositoryStub } = makeSut();
     jest
-      .spyOn(ReceiverRepositoryStub, "add")
+      .spyOn(addReceiverRepositoryStub, "add")
       .mockReturnValueOnce(
         new Promise((resolve, reject) => reject(new Error()))
       );
@@ -70,9 +71,13 @@ describe("dbHandlerAddReceiver use case", () => {
     const receiver = await sut.add(receiverData);
 
     expect(receiver).toEqual({
-      ...receiverDataEncrypted,
-      status: "RASCUNHO",
+      document: "encrypted_value",
+      email: "encrypted_value",
       id: "valid_id",
+      name: "valid_name",
+      pixKey: "encrypted_value",
+      pixKeyType: "encrypted_value",
+      status: "RASCUNHO",
     });
   });
 });

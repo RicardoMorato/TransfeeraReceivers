@@ -4,5 +4,5 @@ import { Collection } from "mongodb";
 export interface DatabaseHelper {
   connect: () => Promise<void>;
   disconnect: () => Promise<void>;
-  getCollection: (collectionName: string) => Collection | Array<ReceiverModel>;
+  getCollection: (collectionName: string) => Collection;
 }

@@ -1,7 +1,6 @@
 import { Collection, Document, MongoClient } from "mongodb";
 
 import { DatabaseHelper } from "@/infra/db";
-import { ReceiverModel } from "@/domain/models/Receiver";
 
 export class DBHelper implements DatabaseHelper {
   private client: MongoClient;
@@ -22,9 +21,7 @@ export class DBHelper implements DatabaseHelper {
     this.client = null;
   }
 
-  getCollection(
-    collectionName: string
-  ): Collection<Document> | ReceiverModel[] {
+  getCollection(collectionName: string): Collection<Document> {
     return this.client.db().collection(collectionName);
   }
 }

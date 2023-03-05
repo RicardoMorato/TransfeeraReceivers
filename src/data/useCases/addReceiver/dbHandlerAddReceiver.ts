@@ -2,17 +2,21 @@ import {
   AddReceiver,
   AddReceiverModel,
   ReceiverModel,
-  ReceiverRepository,
+  AddReceiverRepository,
   Encrypter,
 } from "./dbHandlerAddReceiverProtocols";
+import { Status } from "@/domain/models/Receiver";
 
 export class DbHandlerAddReceiver implements AddReceiver {
   private readonly encrypter: Encrypter;
-  private readonly ReceiverRepository: ReceiverRepository;
+  private readonly addReceiverRepository: AddReceiverRepository;
 
-  constructor(encrypter: Encrypter, ReceiverRepository: ReceiverRepository) {
+  constructor(
+    encrypter: Encrypter,
+    addReceiverRepository: AddReceiverRepository
+  ) {
     this.encrypter = encrypter;
-    this.ReceiverRepository = ReceiverRepository;
+    this.addReceiverRepository = addReceiverRepository;
   }
 
   async add(receiverData: AddReceiverModel): Promise<ReceiverModel> {
@@ -23,13 +27,21 @@ export class DbHandlerAddReceiver implements AddReceiver {
         receiverData.pixKeyType.toString()
       ),
       pixKey: await this.encrypter.encrypt(receiverData.pixKey),
+      status: "RASCUNHO" as Status,
     };
 
-    const receiver = await this.ReceiverRepository.add({
+    const receiverBody = {
       ...encryptedValues,
       name: receiverData.name,
-    });
+    };
 
-    return new Promise((resolve) => resolve(receiver));
+    const receiver = await this.addReceiverRepository.add(receiverBody);
+
+    const result = {
+      ...receiverBody,
+      id: receiver.insertedId,
+    };
+
+    return new Promise((resolve) => resolve(result));
   }
 }
