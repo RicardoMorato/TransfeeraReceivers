@@ -7,7 +7,7 @@ import {
 import {
   badRequest,
   serverError,
-  ok,
+  created,
 } from "@/presentation/helpers/http-helper";
 import { AddReceiver } from "@/domain/useCases/addReceiver";
 
@@ -39,7 +39,10 @@ export class CreateReceiverController implements Controller {
         pixKey,
       });
 
-      return ok(receiver);
+      return created({
+        message: `Receiver created with id: ${receiver.id}`,
+        id: receiver.id,
+      });
     } catch (error: unknown) {
       return serverError(error as Error);
     }

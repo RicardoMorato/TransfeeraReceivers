@@ -61,11 +61,10 @@ describe("createReceiverController", () => {
 
     const response = await sut.handle(request);
 
-    expect(response.statusCode).toBe(200);
+    expect(response.statusCode).toBe(201);
     expect(response.body).toEqual({
-      ...request.body,
+      message: "Receiver created with id: valid_id",
       id: "valid_id",
-      status: "RASCUNHO",
     });
   });
 });
