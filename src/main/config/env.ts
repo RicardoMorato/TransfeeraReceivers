@@ -13,7 +13,7 @@ interface EnvVariables {
   };
 }
 
-const env = process.env.NODE_ENV; // 'development' or 'testing'
+const env = process.env.NODE_ENV || "development"; // 'development' or 'testing'
 
 const development: EnvVariables = {
   APP: {
@@ -33,7 +33,7 @@ const testing: EnvVariables = {
     NODE_ENV: process.env.NODE_ENV || "testing",
   },
   DB: {
-    CONNECTION_URL: process.env.DB_CONNECTION_URL || "localhost:5432",
+    CONNECTION_URL: process.env.TESTING_DB_CONNECTION_URL || "localhost:5432",
   },
 };
 

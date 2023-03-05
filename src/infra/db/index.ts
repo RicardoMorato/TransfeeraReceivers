@@ -1,3 +1,3 @@
 export * from "./mongodb";
 export * from "./databaseHelperProtocol";
-export * from "./setupDatabase";
+export * from "../../main/config/setupDatabase";

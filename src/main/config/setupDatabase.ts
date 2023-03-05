@@ -1,4 +1,4 @@
-import { DBHelper } from "./mongodb";
+import { DBHelper } from "@/infra/db/mongodb";
 import { getEnvVariables } from "@/main/config";
 
 const {
