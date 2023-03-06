@@ -2,10 +2,16 @@ import { ListAllReceiversController } from "@/presentation/controllers";
 import { ReceiverModel } from "@/domain/models/Receiver";
 import { ListReceivers } from "@/domain/useCases/listReceivers";
 import { ObjectId } from "mongodb";
+import {
+  HttpRequest,
+  ListAllReceiversValidation,
+} from "@/presentation/protocols";
+import { ValidationResult } from "@/presentation/utils";
 
 interface SutTypes {
   sut: ListAllReceiversController;
   listReceiversStub: ListReceivers;
+  validatorAdapterStub: ListAllReceiversValidation;
 }
 
 export const fakeListOfReceivers: ReceiverModel[] = [
@@ -22,11 +28,16 @@ export const fakeListOfReceivers: ReceiverModel[] = [
 
 export const makeSut = (): SutTypes => {
   const listReceiversStub = makeListReceivers();
-  const sut = new ListAllReceiversController(listReceiversStub);
+  const validatorAdapterStub = makeValidatorAdapterStub();
+  const sut = new ListAllReceiversController(
+    listReceiversStub,
+    validatorAdapterStub
+  );
 
   return {
     sut,
     listReceiversStub,
+    validatorAdapterStub,
   };
 };
 
@@ -44,4 +55,17 @@ const makeListReceivers = (): ListReceivers => {
   }
 
   return new ListReceiversStub();
+};
+
+const makeValidatorAdapterStub = () => {
+  class ValidatorAdapterStub implements ListAllReceiversValidation {
+    validate(request: HttpRequest): ValidationResult {
+      return {
+        error: null,
+        isValid: true,
+      };
+    }
+  }
+
+  return new ValidatorAdapterStub();
 };
