@@ -10,6 +10,7 @@ interface EnvVariables {
   };
   DB: {
     CONNECTION_URL: string;
+    COLLECTION_NAME: string;
   };
 }
 
@@ -23,6 +24,7 @@ const development: EnvVariables = {
   },
   DB: {
     CONNECTION_URL: process.env.DB_CONNECTION_URL || "localhost:5432",
+    COLLECTION_NAME: process.env.DB_COLLECTION_NAME || "receivers",
   },
 };
 
@@ -34,6 +36,7 @@ const testing: EnvVariables = {
   },
   DB: {
     CONNECTION_URL: process.env.TESTING_DB_CONNECTION_URL || "localhost:5432",
+    COLLECTION_NAME: process.env.DB_COLLECTION_NAME || "receivers",
   },
 };
 

@@ -24,4 +24,8 @@ export class DBHelper implements DatabaseHelper {
   getCollection(collectionName: string): Collection<Document> {
     return this.client.db().collection(collectionName);
   }
+
+  createTextIndex(collectionName: string): void {
+    this.client.db().collection(collectionName).createIndex({ "$**": "text" });
+  }
 }

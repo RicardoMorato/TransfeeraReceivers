@@ -13,3 +13,7 @@ export interface CreateReceiverValidation {
 export interface ListAllReceiversValidation {
   validate: (request: HttpRequest) => ValidationResult;
 }
+
+export interface ListReceiversByFieldValidation {
+  validate: (request: HttpRequest) => ValidationResult;
+}

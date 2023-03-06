@@ -7,6 +7,7 @@ import { getEnvVariables } from "@/main/config";
 
 const {
   APP: { PORT, NODE_ENV },
+  DB: { COLLECTION_NAME },
 } = getEnvVariables();
 
 const app: Application = express();
@@ -22,6 +23,8 @@ export const setupApp = () => {
     .connect()
     .then(async () => {
       console.log("====> Database connected successfully ✅");
+
+      database.createTextIndex(COLLECTION_NAME);
 
       app.listen(port, () => {
         console.log(

@@ -39,10 +39,12 @@ const makeEncrypter = (): Encrypter => {
 
 const makeReceiverRepository = (): ListReceiverRepository => {
   class ReceiverRepositoryStub implements ListReceiverRepository {
-    listBy(field: string, value: string): Promise<ReceiverModel[]> {
-      const filteredValues = receivers.filter((receiver) =>
-        receiver[field].includes(value)
-      );
+    listBy(value: string): Promise<ReceiverModel[]> {
+      const filteredValues = receivers.filter((receiver) => {
+        for (const v of Object.values(receiver)) {
+          if (v === value) return receiver;
+        }
+      });
       return new Promise((resolve) => resolve(filteredValues));
     }
     list(): Promise<ReceiverModel[]> {

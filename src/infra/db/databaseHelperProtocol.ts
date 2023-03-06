@@ -5,4 +5,5 @@ export interface DatabaseHelper {
   connect: () => Promise<void>;
   disconnect: () => Promise<void>;
   getCollection: (collectionName: string) => Collection;
+  createTextIndex: (collectionName: string) => void;
 }

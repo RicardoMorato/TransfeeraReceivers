@@ -61,7 +61,7 @@ describe("dbHandlerListReceivers - List by", () => {
     const { sut, listReceiverRepositoryStub } = makeSut();
     const repositorySpy = jest.spyOn(listReceiverRepositoryStub, "listBy");
 
-    await sut.listBy("status", "RASCUNHO");
+    await sut.listBy("RASCUNHO");
 
     expect(repositorySpy).toHaveBeenCalledTimes(1);
   });
@@ -74,7 +74,7 @@ describe("dbHandlerListReceivers - List by", () => {
         new Promise((resolve, reject) => reject(new Error()))
       );
 
-    const promise = sut.listBy("status", "RASCUNHO");
+    const promise = sut.listBy("RASCUNHO");
 
     await expect(promise).rejects.toThrow();
   });
@@ -82,7 +82,7 @@ describe("dbHandlerListReceivers - List by", () => {
   it("should return result a set of receivers following the correct condition", async () => {
     const { sut } = makeSut();
 
-    const result = await sut.listBy("status", "RASCUNHO");
+    const result = await sut.listBy("RASCUNHO");
 
     expect(result).toBeInstanceOf(Array);
     expect(result).toHaveLength(1);

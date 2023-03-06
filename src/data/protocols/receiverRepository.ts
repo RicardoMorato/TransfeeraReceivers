@@ -8,5 +8,5 @@ export interface AddReceiverRepository {
 
 export interface ListReceiverRepository {
   list(): Promise<ReceiverModel[]>;
-  listBy(field: string, value: string): Promise<ReceiverModel[]>;
+  listBy(value: string): Promise<ReceiverModel[]>;
 }

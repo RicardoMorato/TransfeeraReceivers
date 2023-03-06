@@ -3,7 +3,7 @@ import { ReceiverModel } from "@/domain/models";
 
 export interface ListReceivers {
   list(pageNumber: number): Promise<PaginatedResponse>;
-  listBy(field: string, value: string): Promise<ReceiverModel[]>;
+  listBy(value: string): Promise<ReceiverModel[]>;
   listOne(id: String | ObjectId): Promise<ReceiverModel>;
 }
 

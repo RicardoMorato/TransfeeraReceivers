@@ -49,8 +49,8 @@ export class DbHandlerListReceivers implements ListReceivers {
     return result;
   }
 
-  async listBy(field: string, value: string): Promise<ReceiverModel[]> {
-    const receivers = await this.listReceiverRepository.listBy(field, value);
+  async listBy(value: string): Promise<ReceiverModel[]> {
+    const receivers = await this.listReceiverRepository.listBy(value);
 
     return receivers;
   }
