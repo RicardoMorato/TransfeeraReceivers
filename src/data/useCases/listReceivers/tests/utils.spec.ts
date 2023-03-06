@@ -29,7 +29,7 @@ describe("Paginate", () => {
     });
   });
 
-  it.only("should return correct response when different page size is passed", () => {
+  it("should return correct response when different page size is passed", () => {
     const result = paginate(receivers, 1, 30);
 
     expect(result.data.length).toBe(receivers.length);

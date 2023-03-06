@@ -25,4 +25,14 @@ export class ReceiverMongoRepository
 
     return result;
   }
+
+  async listBy(field: string, value: string): Promise<ReceiverModel[]> {
+    const receiverCollection = database.getCollection("receivers");
+    const query = { [field]: new RegExp(`.*${value}.*`) };
+    const cursor = receiverCollection.find<ReceiverModel>(query);
+
+    const result = await cursor.toArray();
+
+    return result;
+  }
 }

@@ -39,6 +39,12 @@ const makeEncrypter = (): Encrypter => {
 
 const makeReceiverRepository = (): ListReceiverRepository => {
   class ReceiverRepositoryStub implements ListReceiverRepository {
+    listBy(field: string, value: string): Promise<ReceiverModel[]> {
+      const filteredValues = receivers.filter((receiver) =>
+        receiver[field].includes(value)
+      );
+      return new Promise((resolve) => resolve(filteredValues));
+    }
     list(): Promise<ReceiverModel[]> {
       return new Promise((resolve) => resolve(receivers));
     }
@@ -59,7 +65,7 @@ export const receivers: ReceiverModel[] = [
   },
   {
     id: "valid_id",
-    status: "RASCUNHO",
+    status: "VALIDADO",
     name: "valid_name",
     email: "valid_email",
     pixKey: "valid_email",
@@ -68,7 +74,7 @@ export const receivers: ReceiverModel[] = [
   },
   {
     id: "valid_id",
-    status: "RASCUNHO",
+    status: "VALIDADO",
     name: "valid_name",
     email: "valid_email",
     pixKey: "valid_email",
@@ -77,7 +83,7 @@ export const receivers: ReceiverModel[] = [
   },
   {
     id: "valid_id",
-    status: "RASCUNHO",
+    status: "VALIDADO",
     name: "valid_name",
     email: "valid_email",
     pixKey: "valid_email",
@@ -86,7 +92,7 @@ export const receivers: ReceiverModel[] = [
   },
   {
     id: "valid_id",
-    status: "RASCUNHO",
+    status: "VALIDADO",
     name: "valid_name",
     email: "valid_email",
     pixKey: "valid_email",
@@ -95,7 +101,7 @@ export const receivers: ReceiverModel[] = [
   },
   {
     id: "valid_id",
-    status: "RASCUNHO",
+    status: "VALIDADO",
     name: "valid_name",
     email: "valid_email",
     pixKey: "valid_email",
@@ -104,7 +110,7 @@ export const receivers: ReceiverModel[] = [
   },
   {
     id: "valid_id",
-    status: "RASCUNHO",
+    status: "VALIDADO",
     name: "valid_name",
     email: "valid_email",
     pixKey: "valid_email",
@@ -113,7 +119,7 @@ export const receivers: ReceiverModel[] = [
   },
   {
     id: "valid_id",
-    status: "RASCUNHO",
+    status: "VALIDADO",
     name: "valid_name",
     email: "valid_email",
     pixKey: "valid_email",
@@ -122,7 +128,7 @@ export const receivers: ReceiverModel[] = [
   },
   {
     id: "valid_id",
-    status: "RASCUNHO",
+    status: "VALIDADO",
     name: "valid_name",
     email: "valid_email",
     pixKey: "valid_email",
@@ -131,7 +137,7 @@ export const receivers: ReceiverModel[] = [
   },
   {
     id: "valid_id",
-    status: "RASCUNHO",
+    status: "VALIDADO",
     name: "valid_name",
     email: "valid_email",
     pixKey: "valid_email",
@@ -140,7 +146,7 @@ export const receivers: ReceiverModel[] = [
   },
   {
     id: "valid_id",
-    status: "RASCUNHO",
+    status: "VALIDADO",
     name: "valid_name",
     email: "valid_email",
     pixKey: "valid_email",
@@ -149,7 +155,7 @@ export const receivers: ReceiverModel[] = [
   },
   {
     id: "valid_id",
-    status: "RASCUNHO",
+    status: "VALIDADO",
     name: "valid_name",
     email: "valid_email",
     pixKey: "valid_email",
@@ -158,7 +164,7 @@ export const receivers: ReceiverModel[] = [
   },
   {
     id: "valid_id",
-    status: "RASCUNHO",
+    status: "VALIDADO",
     name: "valid_name",
     email: "valid_email",
     pixKey: "valid_email",
