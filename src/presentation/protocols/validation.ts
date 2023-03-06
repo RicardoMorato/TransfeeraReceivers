@@ -9,3 +9,7 @@ export interface CreateReceiverValidation {
   isPixKeyTypeValid: (pixKeyType: PixKeyType | string) => boolean;
   isPixKeyValid: (pixKey: string, pixKeyType: PixKeyType) => boolean;
 }
+
+export interface ListAllReceiversValidation {
+  validate: (request: HttpRequest) => ValidationResult;
+}
