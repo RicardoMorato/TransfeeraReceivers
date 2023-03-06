@@ -8,7 +8,7 @@ import {
   badRequest,
   serverError,
   created,
-} from "@/presentation/helpers/http-helper";
+} from "@/presentation/responseSchemas/http-helper";
 import { AddReceiver } from "@/domain/useCases/addReceiver";
 
 export class CreateReceiverController implements Controller {
