@@ -1,5 +1,8 @@
 import { Router, Request, Response } from "express";
-import { makeCreateReceiverController } from "@/main/factories";
+import {
+  makeCreateReceiverController,
+  makeListAllReceiversController,
+} from "@/main/factories";
 import { adaptRoute } from "@/main/adapters";
 
 const router = Router();
@@ -12,5 +15,6 @@ router.get("/health", (req: Request, response: Response) =>
 );
 
 router.post("/receivers", adaptRoute(makeCreateReceiverController()));
+router.get("/receivers", adaptRoute(makeListAllReceiversController()));
 
 export { router };
