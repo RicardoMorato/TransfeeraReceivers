@@ -29,7 +29,9 @@ export class ListAllReceiversController implements Controller {
 
       if (!isValid) return badRequest(error);
 
-      const receivers = await this.listReceivers.list();
+      const { pageNumber } = request.params;
+
+      const receivers = await this.listReceivers.list(pageNumber);
 
       return ok({ data: receivers });
     } catch (error: unknown) {

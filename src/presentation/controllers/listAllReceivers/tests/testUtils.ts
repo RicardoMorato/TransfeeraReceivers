@@ -1,6 +1,9 @@
 import { ListAllReceiversController } from "@/presentation/controllers";
 import { ReceiverModel } from "@/domain/models/Receiver";
-import { ListReceivers } from "@/domain/useCases/listReceivers";
+import {
+  ListReceivers,
+  PaginatedResponse,
+} from "@/domain/useCases/listReceivers";
 import { ObjectId } from "mongodb";
 import {
   HttpRequest,
@@ -43,8 +46,10 @@ export const makeSut = (): SutTypes => {
 
 const makeListReceivers = (): ListReceivers => {
   class ListReceiversStub implements ListReceivers {
-    list(): Promise<ReceiverModel[]> {
-      return new Promise((resolve) => resolve(fakeListOfReceivers));
+    list(pageNumber: number): Promise<PaginatedResponse> {
+      return new Promise((resolve) =>
+        resolve({ data: fakeListOfReceivers, totalPages: 1 })
+      );
     }
     listBy(field: string): Promise<ReceiverModel[]> {
       throw new Error("Method not implemented.");
