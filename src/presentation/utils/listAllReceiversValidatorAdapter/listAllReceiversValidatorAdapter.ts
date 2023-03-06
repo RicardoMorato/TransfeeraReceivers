@@ -27,5 +27,10 @@ export class ListAllReceiversValidatorAdapter
         isValid: false,
       };
     }
+
+    return {
+      error: null,
+      isValid: true,
+    };
   }
 }
