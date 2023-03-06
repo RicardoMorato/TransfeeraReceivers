@@ -33,7 +33,7 @@ export class ListAllReceiversController implements Controller {
 
       const receivers = await this.listReceivers.list(pageNumber);
 
-      return ok({ data: receivers });
+      return ok(receivers);
     } catch (error: unknown) {
       return serverError(error as Error);
     }

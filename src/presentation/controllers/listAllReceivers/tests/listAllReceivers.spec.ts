@@ -56,7 +56,7 @@ describe("listAllReceiversController", () => {
     const response = await sut.handle(request);
 
     expect(response.statusCode).toBe(200);
-    expect(response.body.data).toStrictEqual({
+    expect(response.body).toStrictEqual({
       data: fakeListOfReceivers,
       totalPages: 1,
     });
