@@ -44,7 +44,6 @@ export class UpdateReceiverController implements Controller {
       if (!receiver) return notFound(new NotFoundError());
 
       if (receiver.status === "RASCUNHO") {
-        console.log(request.body);
         const result = await this.updateReceiver.update(request.body);
 
         if (!result) return notFound(new NotFoundError());
@@ -61,7 +60,6 @@ export class UpdateReceiverController implements Controller {
 
       return noContent();
     } catch (error: unknown) {
-      console.log("ERROR: ", error);
       return serverError(error as Error);
     }
   }
