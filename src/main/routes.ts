@@ -2,6 +2,7 @@ import { Router, Request, Response } from "express";
 import {
   makeCreateReceiverController,
   makeListAllReceiversController,
+  makeListOneReceiverController,
   makeListReceiversByFieldController,
 } from "@/main/factories";
 import { adaptRoute } from "@/main/adapters";
@@ -21,5 +22,6 @@ router.get(
   "/receivers/search",
   adaptRoute(makeListReceiversByFieldController())
 );
+router.get("/receivers/:id", adaptRoute(makeListOneReceiverController()));
 
 export { router };

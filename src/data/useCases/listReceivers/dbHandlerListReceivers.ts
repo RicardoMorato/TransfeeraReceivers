@@ -55,7 +55,9 @@ export class DbHandlerListReceivers implements ListReceivers {
     return receivers;
   }
 
-  listOne(id: String | ObjectId): Promise<ReceiverModel> {
-    throw new Error("Method not implemented.");
+  async listOne(id: String | ObjectId): Promise<ReceiverModel> {
+    const receiver = await this.listReceiverRepository.listOne(id);
+
+    return receiver;
   }
 }

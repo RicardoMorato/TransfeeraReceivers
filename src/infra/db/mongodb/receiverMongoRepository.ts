@@ -1,4 +1,4 @@
-import { InsertOneResult, Document } from "mongodb";
+import { InsertOneResult, Document, ObjectId } from "mongodb";
 import { database } from "@/infra/db";
 import {
   AddReceiverRepository,
@@ -32,6 +32,24 @@ export class ReceiverMongoRepository
     const cursor = receiverCollection.find<ReceiverModel>(query);
 
     const result = await cursor.toArray();
+
+    return result;
+  }
+
+  async listOne(id: String | ObjectId): Promise<ReceiverModel> {
+    const receiverCollection = database.getCollection("receivers");
+
+    let sanitizedId = null;
+
+    try {
+      sanitizedId = new ObjectId(id as ObjectId);
+    } catch (e) {
+      return null;
+    }
+
+    const result = await receiverCollection.findOne<ReceiverModel>({
+      _id: sanitizedId,
+    });
 
     return result;
   }

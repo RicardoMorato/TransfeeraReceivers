@@ -2,6 +2,7 @@ import { Encrypter } from "@/data/protocols/encrypter";
 import { ReceiverModel } from "@/domain/models";
 import { ListReceiverRepository } from "@/data/useCases";
 import { DbHandlerListReceivers } from "../dbHandlerListReceivers";
+import { ObjectId } from "mongodb";
 
 interface SutTypes {
   sut: DbHandlerListReceivers;
@@ -50,6 +51,13 @@ const makeReceiverRepository = (): ListReceiverRepository => {
     list(): Promise<ReceiverModel[]> {
       return new Promise((resolve) => resolve(receivers));
     }
+
+    listOne(id: String | ObjectId): Promise<ReceiverModel> {
+      const found = receivers.filter((receiver) => receiver.id === id);
+
+      if (found.length) return new Promise((resolve) => resolve(found[0]));
+      else return null;
+    }
   }
 
   return new ReceiverRepositoryStub();
@@ -57,7 +65,7 @@ const makeReceiverRepository = (): ListReceiverRepository => {
 
 export const receivers: ReceiverModel[] = [
   {
-    id: "valid_id",
+    id: "valid_test_id",
     status: "RASCUNHO",
     name: "valid_name",
     email: "valid_email",

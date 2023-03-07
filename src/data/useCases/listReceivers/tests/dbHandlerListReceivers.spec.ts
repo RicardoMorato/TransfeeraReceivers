@@ -88,3 +88,36 @@ describe("dbHandlerListReceivers - List by", () => {
     expect(result).toHaveLength(1);
   });
 });
+
+describe("dbHandlerListReceivers - List One", () => {
+  it("should call 'list one' repository only once", async () => {
+    const { sut, listReceiverRepositoryStub } = makeSut();
+    const repositorySpy = jest.spyOn(listReceiverRepositoryStub, "listOne");
+
+    await sut.listOne("valid_id");
+
+    expect(repositorySpy).toHaveBeenCalledTimes(1);
+  });
+
+  it("should throw if ListReceiversRepository throws", async () => {
+    const { sut, listReceiverRepositoryStub } = makeSut();
+    jest
+      .spyOn(listReceiverRepositoryStub, "listOne")
+      .mockReturnValueOnce(
+        new Promise((resolve, reject) => reject(new Error()))
+      );
+
+    const promise = sut.listOne("valid_id");
+
+    await expect(promise).rejects.toThrow();
+  });
+
+  it("should return a receiver when found", async () => {
+    const { sut } = makeSut();
+
+    const result = await sut.listOne("valid_test_id");
+
+    expect(result).toBeInstanceOf(Object);
+    expect(result).toStrictEqual(receivers[0]);
+  });
+});

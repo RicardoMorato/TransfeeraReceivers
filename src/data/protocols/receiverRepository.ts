@@ -1,4 +1,4 @@
-import { Document, InsertOneResult } from "mongodb";
+import { Document, InsertOneResult, ObjectId } from "mongodb";
 import { AddReceiverModel } from "@/domain/useCases/addReceiver";
 import { ReceiverModel } from "@/domain/models";
 
@@ -9,4 +9,5 @@ export interface AddReceiverRepository {
 export interface ListReceiverRepository {
   list(): Promise<ReceiverModel[]>;
   listBy(value: string): Promise<ReceiverModel[]>;
+  listOne(id: String | ObjectId): Promise<ReceiverModel>;
 }
