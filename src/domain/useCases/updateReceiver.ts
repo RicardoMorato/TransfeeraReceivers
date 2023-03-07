@@ -1,6 +1,8 @@
-import { ReceiverModel } from "@/domain/models";
+import { ObjectId } from "mongodb";
+import { ReceiverModel, Status } from "../models";
 
 export interface UpdateReceiverModel {
+  id: string | ObjectId;
   name?: string;
   document?: string;
   email?: string;
@@ -10,6 +12,7 @@ export interface UpdateReceiverModel {
   agency?: string;
   accountType?: string;
   accountNumber?: string;
+  status: Status;
 }
 
 export interface UpdateReceiver {

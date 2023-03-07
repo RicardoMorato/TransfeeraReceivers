@@ -8,8 +8,8 @@ import { ObjectId } from "mongodb";
 import {
   HttpRequest,
   ListAllReceiversValidation,
+  ValidationResult,
 } from "@/presentation/protocols";
-import { ValidationResult } from "@/presentation/utils";
 
 interface SutTypes {
   sut: ListReceiversByField;

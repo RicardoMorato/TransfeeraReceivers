@@ -3,12 +3,17 @@ import { database } from "@/infra/db";
 import {
   AddReceiverRepository,
   ListReceiverRepository,
+  UpdateReceiverRepository,
 } from "@/data/protocols/receiverRepository";
 import { AddReceiverModel } from "@/domain/useCases/addReceiver";
+import { UpdateReceiverModel } from "@/domain/useCases/updateReceiver";
 import { ReceiverModel } from "@/domain/models";
 
 export class ReceiverMongoRepository
-  implements AddReceiverRepository, ListReceiverRepository
+  implements
+    AddReceiverRepository,
+    ListReceiverRepository,
+    UpdateReceiverRepository
 {
   async add(receiver: AddReceiverModel): Promise<InsertOneResult<Document>> {
     const receiverCollection = database.getCollection("receivers");
@@ -50,6 +55,31 @@ export class ReceiverMongoRepository
     const result = await receiverCollection.findOne<ReceiverModel>({
       _id: sanitizedId,
     });
+
+    return result;
+  }
+
+  async update(receiver: UpdateReceiverModel): Promise<ReceiverModel> {
+    const receiverCollection = database.getCollection("receivers");
+
+    let sanitizedId = null;
+
+    try {
+      sanitizedId = new ObjectId(receiver.id as ObjectId);
+    } catch (e) {
+      return null;
+    }
+
+    delete receiver.id;
+
+    console.log(receiver);
+
+    const result = (await receiverCollection.findOneAndReplace(
+      {
+        _id: sanitizedId,
+      },
+      receiver
+    )) as unknown as ReceiverModel;
 
     return result;
   }

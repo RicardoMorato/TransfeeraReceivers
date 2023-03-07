@@ -1,11 +1,11 @@
 import {
   CreateReceiverValidation,
   HttpRequest,
+  ValidationResult,
 } from "@/presentation/protocols";
 import { CreateReceiverController } from "@/presentation/controllers";
 import { AddReceiver, AddReceiverModel } from "@/domain/useCases/addReceiver";
 import { PixKeyType, ReceiverModel } from "@/domain/models/Receiver";
-import { ValidationResult } from "@/presentation/utils/createReceiverValidatorAdapter";
 
 interface SutTypes {
   sut: CreateReceiverController;

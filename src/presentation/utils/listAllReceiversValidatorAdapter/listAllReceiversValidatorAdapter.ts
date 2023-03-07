@@ -2,8 +2,8 @@ import { InvalidParamError } from "@/presentation/errors";
 import {
   HttpRequest,
   ListAllReceiversValidation,
+  ValidationResult,
 } from "@/presentation/protocols";
-import { ValidationResult } from "@/presentation/utils";
 
 export class ListAllReceiversValidatorAdapter
   implements ListAllReceiversValidation

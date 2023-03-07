@@ -4,6 +4,7 @@ import {
   makeListAllReceiversController,
   makeListOneReceiverController,
   makeListReceiversByFieldController,
+  makeUpdateReceiverController,
 } from "@/main/factories";
 import { adaptRoute } from "@/main/adapters";
 
@@ -23,5 +24,6 @@ router.get(
   adaptRoute(makeListReceiversByFieldController())
 );
 router.get("/receivers/:id", adaptRoute(makeListOneReceiverController()));
+router.put("/receivers", adaptRoute(makeUpdateReceiverController()));
 
 export { router };

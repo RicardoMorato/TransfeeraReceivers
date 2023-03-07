@@ -1,5 +1,4 @@
 import { PixKeyType } from "@/domain/models/Receiver";
-import { ValidationResult } from "@/presentation/utils/createReceiverValidatorAdapter";
 import { HttpRequest } from "./http";
 
 export interface CreateReceiverValidation {
@@ -10,10 +9,26 @@ export interface CreateReceiverValidation {
   isPixKeyValid: (pixKey: string, pixKeyType: PixKeyType) => boolean;
 }
 
+export interface UpdateReceiverValidation extends CreateReceiverValidation {
+  validateUpdate: (request: HttpRequest) => ValidationResult;
+  isStatusValid: (receiverStatus: string) => UpdateType;
+}
+
 export interface ListAllReceiversValidation {
   validate: (request: HttpRequest) => ValidationResult;
 }
 
 export interface ListReceiversByFieldValidation {
   validate: (request: HttpRequest) => ValidationResult;
+}
+
+export interface ValidationResult {
+  isValid: boolean;
+  error: Error | null;
+  type?: "COMPLETE" | "ONLY-EMAIL";
+}
+
+export interface UpdateType {
+  isValid: boolean;
+  updateType: "COMPLETE" | "ONLY-EMAIL" | "INVALID";
 }

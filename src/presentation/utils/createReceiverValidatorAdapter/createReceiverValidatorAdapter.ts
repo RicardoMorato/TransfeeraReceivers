@@ -3,8 +3,8 @@ import { InvalidParamError, MissingParamError } from "@/presentation/errors";
 import {
   HttpRequest,
   CreateReceiverValidation,
+  ValidationResult,
 } from "@/presentation/protocols";
-import { ValidationResult } from "./createReceiverValidatorAdapterProtocol";
 import { isStringValidPixKeyType } from "../isStringValidPixKeyType";
 import { validationPatterns } from "../validationPatterns";
 
