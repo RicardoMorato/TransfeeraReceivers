@@ -56,6 +56,10 @@ To run the integration tests, run:
 npm run test:integration
 ```
 
+If you want to do manual testing in the application, here is a Postman collection for you!
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/20223915-2ba50894-3807-47b9-9592-afcd9b6c486e?action=collection%2Ffork&collection-url=entityId%3D20223915-2ba50894-3807-47b9-9592-afcd9b6c486e%26entityType%3Dcollection%26workspaceId%3Da7665902-02d0-43c5-97ff-30749f93af10#?env%5BTransfeeraReceiversEnvironment%5D=W3sia2V5IjoiYXBwX3VybCIsInZhbHVlIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQiLCJzZXNzaW9uVmFsdWUiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJzZXNzaW9uSW5kZXgiOjB9XQ==)
+
 ## Contributing
 
 Feel free to leave feedbacks and suggestions for this codebase. There are known minor issues, but some may have not been discovered yet.
