@@ -19,5 +19,4 @@ export interface UpdateReceiverRepository {
 
 export interface DeleteReceiverRepository {
   deleteOne(id: String | ObjectId): Promise<ReceiverModel>;
-  deleteMany(ids: String[] | ObjectId[]): Promise<ReceiverModel>;
 }
