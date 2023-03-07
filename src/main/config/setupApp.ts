@@ -33,4 +33,6 @@ export const setupApp = () => {
       });
     })
     .catch(console.error);
+
+  return app;
 };
