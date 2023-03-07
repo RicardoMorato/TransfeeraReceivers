@@ -2,6 +2,7 @@ import { InsertOneResult, Document, ObjectId } from "mongodb";
 import { database } from "@/infra/db";
 import {
   AddReceiverRepository,
+  DeleteReceiverRepository,
   ListReceiverRepository,
   UpdateReceiverRepository,
 } from "@/data/protocols/receiverRepository";
@@ -13,7 +14,8 @@ export class ReceiverMongoRepository
   implements
     AddReceiverRepository,
     ListReceiverRepository,
-    UpdateReceiverRepository
+    UpdateReceiverRepository,
+    DeleteReceiverRepository
 {
   async add(receiver: AddReceiverModel): Promise<InsertOneResult<Document>> {
     const receiverCollection = database.getCollection("receivers");
@@ -72,14 +74,30 @@ export class ReceiverMongoRepository
 
     delete receiver.id;
 
-    console.log(receiver);
-
     const result = (await receiverCollection.findOneAndReplace(
       {
         _id: sanitizedId,
       },
       receiver
     )) as unknown as ReceiverModel;
+
+    return result;
+  }
+
+  async deleteOne(id: String | ObjectId): Promise<ReceiverModel> {
+    const receiverCollection = database.getCollection("receivers");
+
+    let sanitizedId = null;
+
+    try {
+      sanitizedId = new ObjectId(id as ObjectId);
+    } catch (e) {
+      return null;
+    }
+
+    const result = (await receiverCollection.findOneAndDelete({
+      _id: sanitizedId,
+    })) as unknown as ReceiverModel;
 
     return result;
   }
