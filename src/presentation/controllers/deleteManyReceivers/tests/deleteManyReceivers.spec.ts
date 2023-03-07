@@ -29,7 +29,7 @@ describe("deleteManyReceiversController", () => {
     expect(response.body).toEqual(new ServerError(""));
   });
 
-  it("should return 200 with all deleted receivers if no error occurs", async () => {
+  it("should return 200 with all ids if no error occurs", async () => {
     const { sut } = makeSut();
 
     const response = await sut.handle(request);
@@ -37,7 +37,7 @@ describe("deleteManyReceiversController", () => {
     expect(response.statusCode).toBe(200);
     expect(response.body).toStrictEqual({
       data: {
-        deletedReceivers: receivers,
+        deletedReceivers: receivers.map((receiver) => receiver.id),
       },
     });
   });

@@ -25,13 +25,13 @@ const makeDeleteReceivers = (): DeleteReceivers => {
 
       return new Promise((resolve) => resolve(receiverFound));
     }
-    async deleteMany(ids: String[] | ObjectId[]): Promise<ReceiverModel[]> {
-      const results: ReceiverModel[] = [];
+    async deleteMany(ids: String[] | ObjectId[]): Promise<String[]> {
+      const results: string[] = [];
 
       for (const id of ids) {
         const result = await this.deleteOne(id);
 
-        results.push(result);
+        results.push(result.id as string);
       }
 
       return results;

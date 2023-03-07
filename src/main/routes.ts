@@ -1,6 +1,8 @@
 import { Router, Request, Response } from "express";
 import {
   makeCreateReceiverController,
+  makeDeleteManyReceiversController,
+  makeDeleteOneReceiverController,
   makeListAllReceiversController,
   makeListOneReceiverController,
   makeListReceiversByFieldController,
@@ -25,5 +27,10 @@ router.get(
 );
 router.get("/receivers/:id", adaptRoute(makeListOneReceiverController()));
 router.put("/receivers", adaptRoute(makeUpdateReceiverController()));
+router.delete("/receivers/:id", adaptRoute(makeDeleteOneReceiverController()));
+router.post(
+  "/receivers/delete-many",
+  adaptRoute(makeDeleteManyReceiversController())
+);
 
 export { router };

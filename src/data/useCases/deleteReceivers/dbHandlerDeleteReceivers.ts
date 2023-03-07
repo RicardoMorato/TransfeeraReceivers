@@ -15,12 +15,12 @@ export class DbHandlerDeleteReceivers implements DeleteReceivers {
     return deletedReceiver;
   }
 
-  async deleteMany(ids: String[] | ObjectId[]): Promise<ReceiverModel[]> {
-    const results: ReceiverModel[] = [];
+  async deleteMany(ids: String[] | ObjectId[]): Promise<String[]> {
+    const results: String[] = [];
 
     for (const id of ids) {
       const result = await this.deleteOne(id);
-      results.push(result);
+      results.push(id as string);
     }
 
     return results;

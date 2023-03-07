@@ -33,7 +33,7 @@ const makeDeleteReceivers = (): DeleteReceivers => {
     deleteOne(id: String | ObjectId): Promise<ReceiverModel> {
       return new Promise((resolve) => resolve(fakeReceiver));
     }
-    deleteMany(ids: String[] | ObjectId[]): Promise<ReceiverModel[]> {
+    deleteMany(ids: String[] | ObjectId[]): Promise<string[]> {
       throw new Error("Method not implemented.");
     }
   }
